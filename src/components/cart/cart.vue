@@ -72,13 +72,20 @@ export default{
 	},
 	created(){
 		let cartList = localStorage.getItem('goodsList');
-		let jsonstr = JSON.parse(cartList.slice(1,cartList.length));
-		for(let goods in jsonstr.goodsList){
-			//给从localStorage取出来数组添加select属性，并赋值为false
-			jsonstr.goodsList[goods].select = false;
+		if(cartList == null){
+			//如果是第一次运行，购物车数据key不在，所以要判断，模拟添加。
+			let joincart = {"goodsList":[]};
+			localStorage.setItem('goodsList',"'"+JSON.stringify(joincart));
+			this.goodsList = joincart;
+		}else{
+			let jsonstr = JSON.parse(cartList.slice(1,cartList.length));
+			for(let goods in jsonstr.goodsList){
+				//给从localStorage取出来数组添加select属性，并赋值为false
+				jsonstr.goodsList[goods].select = false;
+			}
+			this.goodsList = jsonstr;
+			//console.log(this.goodsList);
 		}
-		this.goodsList = jsonstr;
-		//console.log(this.goodsList);
 	},
 	methods:{
 		handleSelectedAll(){//全选
