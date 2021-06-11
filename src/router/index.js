@@ -12,7 +12,7 @@ import Login from '../components/login/login.vue'
 Vue.use(Router)
 
 export default new Router({
-  mode:"history",
+  //mode:"history",
   routes: [
   {path:'/',redirect:'/Home'},
 	{path:'/home',component:Home,meta:{showTab:true,keepAlive: true}},
